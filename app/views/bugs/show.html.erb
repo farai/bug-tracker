@@ -2,7 +2,7 @@
 
 <p>
   <b>Author</b><br>
-  <%= @bug.author %>
+ <%= @bug.author %>
 </p>
 
 <p>
@@ -29,7 +29,9 @@
     <section id="comments"> 
         <% @comments.each do |comment| %>
             <bug class="comment">      
-                <div class="avatar"><%= image_tag "#" %></div>
+                <%= gravatar_image_tag(@bug.user.email, :alt => 'avatar', :class => 'avatar', :gravatar => {:secure => true , :size => 48 })
+				 %>
+				
                 <div class="commentbody">
                     <div class="commenthead">               
                       <%= comment.user.email %> - <%=time_ago_in_words(comment.created_at)%> ago 
@@ -46,7 +48,8 @@
         <% # add a new comment %>   
         <bug class="comment newcomment">            
                 <% if user_signed_in? %>
-                    <div class="avatar"><%= image_tag "#" %></div>
+                      <%= gravatar_image_tag(@bug.user.email, :alt => 'avatar', :class => 'avatar', :gravatar => {:secure => true , :size => 48 })
+						 %>
                     <div class="commentbody">
                         <% if current_user.email == nil or current_user.email == '' %>
                             <div class="commenthead">
