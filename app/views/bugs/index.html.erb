@@ -1,0 +1,30 @@
+<h1>Bugs</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Author</th>
+      <th>Created at</th>
+      <th>Descriptions</th>
+	 <th>Status</th>
+	<th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bugs.each do |bug| %>
+      <tr>
+        <td><%= bug.id %></td>
+        <td><%= link_to bug.author, bug_path(bug) %></td>
+        <td><%= bug.created_at %></td>
+		<td><%= bug.description %></td>
+		<td><%= bug.status %></td>
+        <td>
+          <%= link_to 'Edit', edit_bug_path(bug), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', bug_path(bug), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_bug_path, :class => 'btn btn-primary' %>

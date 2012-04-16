@@ -1,0 +1,80 @@
+<h1>/Bug</h1>
+
+<p>
+  <b>Author</b><br>
+  <%= @bug.author %>
+</p>
+
+<p>
+  <b>Email</b><br>
+  <%= @bug.email %>
+</p>
+
+<p>
+  <b>Description</b><br>
+  <%= @bug.description %>
+</p>
+
+<p>
+  <b>Priority</b><br>
+  <%= @bug.priority %>
+</p>
+
+<p>
+  <b>Status</b><br>
+  <%= @bug.status %>
+</p>
+<% # comments are available for published bugs only %>
+
+    <section id="comments"> 
+        <% @comments.each do |comment| %>
+            <bug class="comment">      
+                <div class="avatar"><%= image_tag "#" %></div>
+                <div class="commentbody">
+                    <div class="commenthead">               
+                      <%= comment.user.email %> - <%=time_ago_in_words(comment.created_at)%> ago 
+                      <% # display delete link only for comments written by this particular user %>
+                      <% if user_signed_in? and comment.user_id == current_user.id %>
+                          <span><%= link_to 'delete', bug_comment_path(@bug, comment), :confirm => 'Are you sure?', :method => :delete, :class => "" %></span>
+                      <% end %> 
+                    </div>
+                    <div><%= comment.body %></div>
+                </div>  
+            </bug>
+        <% end %>
+    
+        <% # add a new comment %>   
+        <bug class="comment newcomment">            
+                <% if user_signed_in? %>
+                    <div class="avatar"><%= image_tag "#" %></div>
+                    <div class="commentbody">
+                        <% if current_user.email == nil or current_user.email == '' %>
+                            <div class="commenthead">
+                                Please complete your <%= link_to "profile", edit_user_registration_path %> before posting comments.
+                            </div>
+                        <% else %>              
+                            <div class="commenthead">
+                                <%= current_user.email %>
+                            </div>
+                            <div>
+                                <%= form_for [@bug, current_user.comments.new] do |f| %>
+                                    <%= f.text_area :body, :size => "100%x20", :class => "fullwidth" %>
+                                    <%= f.submit "Add Comment", :class => "awesome custom red" %>
+                                <% end %>               
+                            </div>          
+                        <% end %>
+                    </div>  
+                <% else %>
+                    <div class="signin">
+                        Please <%= link_to "sign in", new_user_session_path %> before posting a comment.
+                    </div>
+                <% end %>
+			
+        </bug>
+    </section>
+
+<div class="form-actions">
+  <%= link_to 'Back', bugs_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_bug_path(@bug), :class => 'btn' %>
+  <%= link_to 'Delete', bug_path(@bug), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

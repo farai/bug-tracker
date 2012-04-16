@@ -1,4 +1,15 @@
 Bugtracker::Application.routes.draw do
+  
+  devise_for :users
+
+  resources :bugs do
+    resources :comments, :only => [:create, :destroy] 
+  end
+
+  root :to => "home#index"
+  
+  resources :comments, :only => [:create, :destroy] 
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
