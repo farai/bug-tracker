@@ -5,8 +5,8 @@
       <th>ID</th>
       <th>Author</th>
       <th>Created at</th>
-      <th>Descriptions</th>
-	 <th>Status</th>
+      <th>Report</th>
+	 <th> Case Status</th>
 	<th>Actions</th>
     </tr>
   </thead>
@@ -17,7 +17,8 @@
         <td><%= link_to bug.author, bug_path(bug) %></td>
         <td><%= bug.created_at %></td>
 		<td><%= bug.description %></td>
-		<td><%= bug.status %></td>
+		<td><span class="<%= status_icon(bug.status) %>"><%= bug.status %></span></td>
+		<td><%= link_to 'View', bug_path(bug), :class => 'btn btn-mini' %></td>
         <td>
           <%= link_to 'Edit', edit_bug_path(bug), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', bug_path(bug), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
