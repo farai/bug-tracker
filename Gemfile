@@ -1,6 +1,10 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
+
+gem 'formtastic', " ~> 2.1.1"
+
+gem 'formtastic-bootstrap'
 gem 'devise'
 gem 'gravatar_image_tag'
 

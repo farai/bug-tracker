@@ -11,20 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415230155) do
-
+ActiveRecord::Schema.define(:version => 20120612163953) do
+  
   create_table "bugs", :force => true do |t|
-    t.integer  "user_id",     :null => false
-    t.string   "author"
-    t.string   "email"
-    t.text     "description"
-    t.string   "priority"
-    t.string   "status"
+    t.integer "project_id", :null => false
+    t.string "author"
+    t.string "email"
+    t.text "description"
+    t.string "priority"
+    t.string "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "bugs", ["user_id"], :name => "index_bugs_on_user_id"
+  
+  add_index "bugs", "project_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(:version => 20120415230155) do
   end
 
   add_index "comments", ["user_id", "bug_id"], :name => "index_comments_on_user_id_and_bug_id"
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "owner"
+    t.string   "release_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

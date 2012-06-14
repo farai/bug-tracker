@@ -1,8 +1,6 @@
 class BugsController < ApplicationController
   # GET /bugs
-  # GET /bugs.json
-  before_filter :authenticate_user!, :except => [:index, :show]
-  
+  # GET /bugs.json  
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   
   def index
@@ -45,7 +43,7 @@ class BugsController < ApplicationController
   # POST /bugs
   # POST /bugs.json
   def create
-    @bug = current_user.bugs.new(params[:bug])
+    @bug = Bug.new(params[:bug])
 
     respond_to do |format|
       if @bug.save
