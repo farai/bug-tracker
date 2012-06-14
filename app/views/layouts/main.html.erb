@@ -33,7 +33,7 @@
           <%= link_to "BugTracker", root_path, :class => "brand"  %>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-                <li><%= link_to "Current issues", bugs_path  %></li>
+                <li><%= link_to "Projects", projects_path  %></li>
                 <li><%= link_to "Report bug", new_bug_path   %></li>
 				<% if user_signed_in? %> 
 			    <li><%= link_to "My Profile", edit_user_registration_path %></li>
