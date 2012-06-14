@@ -1,27 +1,27 @@
-<h1>/Bug</h1>
+<h1>Bug Information</h1>
 
 <p>
-  <b>Author</b><br>
+  <b>Reported By:</b><br>
  <%= @bug.author %>
 </p>
 
 <p>
-  <b>Email</b><br>
+  <b>Email:</b><br>
   <%= @bug.email %>
 </p>
 
 <p>
-  <b>Report</b><br>
+  <b>Bug Description:</b><br>
   <%= @bug.description %>
 </p>
 
 <p>
-  <b>Priority</b><br>
+  <b>Priority:</b><br>
   <%= @bug.priority %>
 </p>
 
 <p>
-  <b>Case Status</b><br>
+  <b>Case Status:</b><br>
   <%= @bug.status %>
 </p>
 <% # comments are available for published bugs only %>
@@ -77,7 +77,7 @@
     </section>
 
 <div class="form-actions">
-  <%= link_to 'Back', bugs_path, :class => 'btn'  %>
+  <%= link_to 'Back', project_path(params[:project]), :class => 'btn'  %>
   <%= link_to 'Edit', edit_bug_path(@bug), :class => 'btn' %>
   <%= link_to 'Delete', bug_path(@bug), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
 </div>

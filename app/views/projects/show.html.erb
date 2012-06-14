@@ -1,20 +1,55 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @project.name %>
+
+<div class="well">
+ <p>
+	<h2>Project Details</h2>
+ <p>
+ <p>
+ <b>Name:</b>&nbsp<span><%= @project.name %></span>
 </p>
 
 <p>
-  <b>Owner:</b>
-  <%= @project.owner %>
+ <b>Owner:</b>&nbsp<span><%= @project.owner %></span>
 </p>
 
 <p>
-  <b>Release date:</b>
-  <%= @project.release_date %>
+ <b>Release Date:</b>&nbsp<span><%= @project.release_date %></span>
 </p>
+</div>
 
+
+<h2>Bugs</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>Reported By</th>
+      <th>Reported On</th>
+      <th>Description</th>
+	  <th>Case Status</th>
+	  <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bugs.each do |bug| %>
+      <tr>
+        <td><%= bug.id %></td>
+        <td><%= bug.author %></td>
+        <td><%= bug.created_at %></td>
+		<td><%= bug.description %></td>
+		<td><span class="<%= status_icon(bug.status) %>"><%= bug.status %></span></td>
+		<td><%= link_to 'View', bug_path(bug, :project => @project), :class => 'btn btn-mini' %>
+          <%= link_to 'Edit', edit_bug_path(bug), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', bug_path(bug), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_bug_path, :class => 'btn btn-primary' %>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+
