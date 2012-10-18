@@ -6,3 +6,38 @@
  *= require_tree . 
  *= require formtastic-bootstrap
 */
+
+
+.dialog, .row .dialog, .row-fluid .dialog, .row-fluid .dialog[class*="span"]:first-child {
+    float: none;
+    margin: 5em auto 0;
+}
+
+.box {
+    background: none repeat scroll 0 0 padding-box white;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 0 #FFFFFF;
+    margin-bottom: 1em;
+}
+
+.box-body {
+    margin: 1em;
+    min-height: 0.25em;
+}
+
+.box-heading {
+    background: -moz-linear-gradient(center bottom , #DDDDDD 0%, #FFFFFF 100%) repeat scroll 0 0 padding-box transparent;
+    border-bottom: 1px solid #AAAAAA;
+    border-radius: 3px 3px 0 0;
+    color: #333333;
+    display: block;
+    filter: none;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 3em;
+    margin-bottom: 0;
+    padding: 0 0.75em;
+    text-shadow: 1px 1px 1px #FFFFFF;
+    text-transform: none;
+}

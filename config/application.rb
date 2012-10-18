@@ -11,6 +11,13 @@ end
 
 module Bugtracker
   class Application < Rails::Application
+    
+    #change devise signin layout, signup and forgot password style
+    config.to_prepare do
+          Devise::SessionsController.layout "signin"
+          Devise::RegistrationsController.layout proc{ |controller| action_name == 'new' ? "registration"   : "main" }
+          Devise::PasswordsController.layout proc{ |controller| action_name == 'new' ? "password"   : "main" }
+        end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

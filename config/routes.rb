@@ -1,5 +1,10 @@
 Bugtracker::Application.routes.draw do
   
+  
+  devise_scope :user do
+  root :to => "devise/sessions#new"
+  end
+  
   resources :projects
 
   devise_for :users
@@ -8,9 +13,10 @@ Bugtracker::Application.routes.draw do
     resources :comments, :only => [:create, :destroy] 
   end
 
-  root :to => "home#index"
+  resources :comments, :only => [:create, :destroy]
   
-  resources :comments, :only => [:create, :destroy] 
+  get "home/index"
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

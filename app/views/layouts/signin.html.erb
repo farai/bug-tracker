@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="BugTracker" />
+	<meta name="keywords" content="BugTracker" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta name="author" content="Farai" />
+
+	<%= stylesheet_link_tag    "application" %>
+	<%= javascript_include_tag  "application.js" %>
+	
+	<%= csrf_meta_tag %>
+	<title>BugTracker</title>	
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span4 dialog">
+				<header>
+					<h1>BugTracker</h1>
+				</header><!--header end -->
+				<div class="box">
+					<div class="box-heading">Sign In</div>
+			            <div class="box-body">
+							<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+							<label><%= f.label :email %></label>
+							<%= f.email_field :email %><br>
+							
+							<label><%= f.label :password %></label>
+							<%= f.password_field :password %><br>
+
+							<% if devise_mapping.rememberable? -%>
+							<label><%= f.check_box :remember_me %> <%= f.label :remember_me %></label><br>
+							<% end -%>
+							<%= f.submit "Sign in" ,:class => "btn btn-primary pull-right" %>
+							<% end %>
+							<p><%= render :partial => "devise/shared/links" %></p>
+							<div class="clearfix"></div>
+			            </div><!--end block-body-->
+			        </div><!--end block -->
+						<footer>
+							<center><p>BugTracker &copy 2012</p></center>
+						</footer>
+			    </div><!--end dialog span4-->
+			</div><!--end row-fluid-->
+		</div><!--end container fluid-->				
+</body>
+</html>
