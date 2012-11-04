@@ -11,20 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612163953) do
-  
+ActiveRecord::Schema.define(:version => 20121103100803) do
+
   create_table "bugs", :force => true do |t|
-    t.integer "project_id", :null => false
-    t.string "author"
-    t.string "email"
-    t.text "description"
-    t.string "priority"
-    t.string "status"
+    t.integer  "project_id",  :null => false
+    t.string   "author"
+    t.string   "email"
+    t.text     "description"
+    t.string   "priority"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "short_desc"
   end
-  
-  add_index "bugs", "project_id"
+
+  add_index "bugs", ["project_id"], :name => "index_bugs_on_project_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"

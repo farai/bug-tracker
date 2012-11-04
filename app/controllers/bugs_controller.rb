@@ -1,4 +1,5 @@
 class BugsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /bugs
   # GET /bugs.json  
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found

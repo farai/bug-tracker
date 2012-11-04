@@ -1,83 +1,127 @@
-<h1>Bug Information</h1>
+<div class="span12">
+	<div class="box">
+		<div class="box-title">Bug Information</div>
+		<div class="box-content">
+			<p class="pull-right"><%= link_to 'Back', project_path(params[:project]), :class => 'btn'  %></p>
+		 	<p>
+			  <b>Reported By:</b><br>
+			 <%= @bug.author %>
+			</p>
 
-<p>
-  <b>Reported By:</b><br>
- <%= @bug.author %>
-</p>
+			<p>
+			  <b>Email:</b><br>
+			  <%= @bug.email %>
+			</p>
 
-<p>
-  <b>Email:</b><br>
-  <%= @bug.email %>
-</p>
+			<p>
+			  <b>Short Description:</b><br>
+			  <%= @bug.short_desc %>
+			</p>
 
-<p>
-  <b>Bug Description:</b><br>
-  <%= @bug.description %>
-</p>
+			<p>
+			  <b>Description:</b><br>
+			  <%= @bug.description %>
+			</p>
 
-<p>
-  <b>Priority:</b><br>
-  <%= @bug.priority %>
-</p>
+			<p>
+			  <b>Priority:</b><br>
+			  <%= @bug.priority %>
+			</p>
 
-<p>
-  <b>Case Status:</b><br>
-  <%= @bug.status %>
-</p>
-<% # comments are available for published bugs only %>
-
-    <section id="comments"> 
-        <% @comments.each do |comment| %>
-            <bug class="comment">      
-                <%= gravatar_image_tag(@bug.user.email, :alt => 'avatar', :class => 'avatar', :gravatar => {:secure => true , :size => 48 })
-				 %>
+			<p>
+			  <b>Case Status:</b><br>
+			  <%= @bug.status %>
+			</p>
+		
+			<br>
+		</div>
+		<div class="form-actions">
+		 
+		  <%= link_to 'Edit', edit_bug_path(@bug), :class => 'btn' %>
+		  <%= link_to 'Delete', bug_path(@bug), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+		</div>
+	</div>
+	
+	<div class="box">
+		<div class="box-title">Comments</div>
+		<div class="box-content">
+			<% # comments are available for published bugs only %>
+			<ol class="comments">
+			<% @comments.each do |comment| %>
+				<li class="comment">
+					  <%= gravatar_image_tag(comment.user.email, :alt => 'avatar', :class => 'avatar', :gravatar => {:secure => true , :size => 48 }) %>
+				<span class="meta">
+					<%= comment.user.email %> - <%=time_ago_in_words(comment.created_at)%> ago 
+					<% # display delete link only for comments written by this particular user %>
+						<% if user_signed_in? and comment.user_id == current_user.id %>
+	                          <span>
+								<%= link_to 'delete', bug_comment_path(@bug, comment), :confirm => 'Are you sure?', :method => :delete, :class => "" %>
+							</span>
+	                      <% end %> 
+				</span>
+				<p><%= comment.body %></p>
+				</li>
+			<%end%>
+			</ol>
+			<br>
+		</div>
+	</div>
+	
+	<div class="box">
+		<div class="box-title">Add Comment</div>
+		<div class="box-content">
+		<% # add a new comment %>
+			<div class="well">
+				<% if user_signed_in? %>
+				<div class="commenthead">
+				 <p><strong>Logged in as:</strong></p>
+				<%= gravatar_image_tag(current_user.email, :alt => 'avatar', :class => 'avatar', :gravatar => {:secure => true , :size => 48 })%><span class="meta">&nbsp<%= current_user.email %></span>
+				</div>
+				<br>
 				
-                <div class="commentbody">
-                    <div class="commenthead">               
-                      <%= comment.user.email %> - <%=time_ago_in_words(comment.created_at)%> ago 
-                      <% # display delete link only for comments written by this particular user %>
-                      <% if user_signed_in? and comment.user_id == current_user.id %>
-                          <span><%= link_to 'delete', bug_comment_path(@bug, comment), :confirm => 'Are you sure?', :method => :delete, :class => "" %></span>
-                      <% end %> 
-                    </div>
-                    <div><%= comment.body %></div>
-                </div>  
-            </bug>
-        <% end %>
-    
-        <% # add a new comment %>   
-        <bug class="comment newcomment">            
-                <% if user_signed_in? %>
-                      <%= gravatar_image_tag(@bug.user.email, :alt => 'avatar', :class => 'avatar', :gravatar => {:secure => true , :size => 48 })
-						 %>
-                    <div class="commentbody">
-                        <% if current_user.email == nil or current_user.email == '' %>
-                            <div class="commenthead">
-                                Please complete your <%= link_to "profile", edit_user_registration_path %> before posting comments.
-                            </div>
-                        <% else %>              
-                            <div class="commenthead">
-                                <%= current_user.email %>
-                            </div>
-                            <div>
-                                <%= form_for [@bug, current_user.comments.new] do |f| %>
-                                    <%= f.text_area :body, :size => "100%x20", :class => "fullwidth" %>
-                                    <%= f.submit "Add Comment", :class => "awesome custom red" %>
-                                <% end %>               
-                            </div>          
-                        <% end %>
-                    </div>  
-                <% else %>
-                    <div class="signin">
-                        Please <%= link_to "sign in", new_user_session_path %> before posting a comment.
-                    </div>
-                <% end %>
-			
-        </bug>
-    </section>
+				<% if current_user.email == nil or current_user.email == '' %>
+		  			<div class="commenthead">
+						<p>Please complete your <%= link_to "profile", edit_user_registration_path %> before posting comments.</p>
+					</div>
+				<%else%>
+				    <p><strong>Your Comment:</strong></p>
+		            <div>
+						<%= form_for [@bug, current_user.comments.new] do |f| %>
+						<%= f.text_area :body, :size => "100%x5" %>
+						<div>
+						<%= f.submit "Add Comment", :class => "btn" %>
+						</div>
+					</div> 
+				<% end %> 
+				<%end%>              
+		                       
+		        <% else %>
+					<div class="signin">
+						<p>Please <%= link_to "sign in", new_user_session_path %> before posting a comment.</p>
+					</div>
+		       <% end %>
+		        </div>
 
-<div class="form-actions">
-  <%= link_to 'Back', project_path(params[:project]), :class => 'btn'  %>
-  <%= link_to 'Edit', edit_bug_path(@bug), :class => 'btn' %>
-  <%= link_to 'Delete', bug_path(@bug), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+		
+			<br>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
 </div>
+
+
+
+
+
+
+
+
+
+

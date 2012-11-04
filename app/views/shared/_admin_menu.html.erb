@@ -1,0 +1,18 @@
+<!--Left Menu -->
+<div class="span3 sidenav">
+	<ul class="nav">
+		<li><%= link_to (home_index_path) do  %>
+			<span class="ico"><i class="icon-home"></span></i>Dashboard 
+			<%end%> 
+		</li>
+		<li><%= link_to (new_bug_path) do  %>
+			<span class="ico"><i class="icon-edit"></span></i>Report A Bug 
+			<%end%></li>
+		<li><%= link_to (projects_path) do  %>
+			<span class="ico"><i class="icon-th-list"></span></i>List All Projects 
+			<%end%></li>
+		<li><%= link_to ("#") do  %>
+			<span class="ico"><i class="icon-info-sign"></span></i>Help 
+			<%end%></li>
+	</ul>
+</div><!--end of menu -->

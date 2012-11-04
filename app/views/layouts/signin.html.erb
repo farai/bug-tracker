@@ -22,9 +22,9 @@
 				<header>
 					<h1>BugTracker</h1>
 				</header><!--header end -->
-				<div class="box">
-					<div class="box-heading">Sign In</div>
-			            <div class="box-body">
+				<div class="login-box">
+					<div class="login-heading">Sign In</div>
+			            <div class="login-body">
 							<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 							<label><%= f.label :email %></label>
 							<%= f.email_field :email %><br>

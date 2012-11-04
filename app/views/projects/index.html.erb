@@ -1,6 +1,11 @@
-<h1>Listing projects</h1>
-
-<table>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box">
+			<div class="box-title">Listing All Projects</div>
+			<div class="box-content nopadding">
+			
+<p class="pull-right"><%= link_to 'Create New Project', new_project_path, :class => "btn"  %></p>
+<table class="table table-striped table-bordered">
   <tr>
     <th>Name</th>
     <th>Owner</th>
@@ -24,4 +29,8 @@
 
 <br />
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'Create New Project', new_project_path %>
+</div><!--./end of box content-->
+</div><!--./end of box-->
+</div><!--./end of span12 -->
+</div><!--./end of row-fluid-->

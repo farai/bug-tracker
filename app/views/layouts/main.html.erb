@@ -32,14 +32,11 @@
           </a>
           <%= link_to "BugTracker", home_index_path, :class => "brand"  %>
           <div class="container-fluid nav-collapse">
-            <ul class="nav">
-                <li><%= link_to "Projects", projects_path  %></li>
-                <li><%= link_to "Report bug", new_bug_path   %></li>
+            <ul class="nav pull-right">
 				<% if user_signed_in? %> 
 			    <li><%= link_to "My Profile", edit_user_registration_path %></li>
 			    <li><%= link_to "Sign out", destroy_user_session_path, :method => 'delete' %></li>
 			    <% else %> 
-			    <li><%= link_to "Sign up", new_user_registration_path %></li> 
 			    <li><%= link_to "Sign in", new_user_session_path %></li>
 			   <% end %>
             </ul>
@@ -50,10 +47,11 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-	
-	<%= render "shared/flash_messages" %>
+		<%= render "shared/admin_menu" %>
+
+		<%= render "shared/flash_messages" %>
      
-        <div class="span">
+        <div class="span9">
           <%= yield %>
         </div>
       </div><!--/row-->

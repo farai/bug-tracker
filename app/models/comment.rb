@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
   
   validates :user_id, :presence => true
   validates :bug_id, :presence => true
-  validates :body, :presence => true, :length => {:maximum => 25000}
+  validates :body, :presence => true
   
   default_scope :order => 'comments.created_at asc'
 end

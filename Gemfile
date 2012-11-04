@@ -7,6 +7,7 @@ gem 'formtastic', " ~> 2.1.1"
 gem 'formtastic-bootstrap'
 gem 'devise'
 gem 'gravatar_image_tag'
+gem 'ffaker'
 
 
 # Bundle edge Rails instead:
