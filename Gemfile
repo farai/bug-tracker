@@ -13,7 +13,9 @@ gem 'ffaker'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
+group :development, :test do
 gem 'sqlite3'
+end
 
 
 # Gems used only for assets and not required
@@ -42,6 +44,10 @@ gem 'jquery-rails'
 group :test do
   # Pretty printed test output
   gem 'turn', '~> 0.8.3', :require => false
+end
+
+group :production do
+	gem 'pg', '0.12.2'
 end
 
 gem "twitter-bootstrap-rails"
